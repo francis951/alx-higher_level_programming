@@ -1,9 +1,12 @@
 #!/usr/bin/python3
-def replace_in_list(my_list, idx, element):
-    # Check if idx is negative or out of range
-    if idx < 0 or idx >= len(my_list):
-        return my_list
+def element_at(my_list, idx):
+    # Check if idx is negative
+    if idx < 0:
+        return None
 
-    # Replace the element at the specified index
-    my_list[idx] = element
-    return my_list
+    # Check if idx is out of range
+    if idx >= len(my_list):
+        return None
+
+    # Return the element at the specified index
+    return my_list[idx]
