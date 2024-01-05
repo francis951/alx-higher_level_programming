@@ -1,27 +1,33 @@
-#define PY_SSIZE_T_CLEAN
-#include <Python.h>
 #include <stdio.h>
+#include <string.h>
+#include <Python.h>
 
-void print_python_string(PyObject *p) {
-    if (!PyUnicode_Check(p)) {
-        fprintf(stderr, "[ERROR] Invalid String Object\n");
-        return;
-    }
+/**
+ * print_python_string - Function that prints strings in Python
+ * @p: Pointer to python object.
+ *
+ * Return: No return.
+ */
+void print_python_string(PyObject *p)
+{
+	PyObject *str, *repr;
 
-    printf("[.] string object info\n");
-    printf("  type: %s\n", PyUnicode_IS_COMPACT_ASCII(p) ? "compact ascii" : "compact unicode object");
-    printf("  length: %ld\n", PyUnicode_GET_LENGTH(p));
-    printf("  value: %ls\n", PyUnicode_AsWideCharString(p, NULL));
+	(void)repr;
+	printf("[.] string object info\n");
+
+	if (strcmp(p->ob_type->tp_name, "str"))
+	{
+		printf("  [ERROR] Invalid String Object\n");
+		return;
+	}
+
+	if (PyUnicode_IS_COMPACT_ASCII(p))
+		printf("  type: compact ascii\n");
+	else
+		printf("  type: compact unicode object\n");
+
+	repr = PyObject_Repr(p);
+	str = PyUnicode_AsEncodedString(p, "utf-8", "~E~");
+	printf("  length: %ld\n", PyUnicode_GET_SIZE(p));
+	printf("  value: %s\n", PyBytes_AsString(str));
 }
-
-int main(void) {
-    wchar_t *str = L"The spoon does not exist";
-    PyObject *py_str = PyUnicode_DecodeW(str, wcslen(str), "utf-32", "strict");
-
-    print_python_string(py_str);
-
-    Py_DECREF(py_str);
-
-    return 0;
-}
-
