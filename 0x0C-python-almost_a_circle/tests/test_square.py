@@ -36,8 +36,8 @@ class TestSquare(unittest.TestCase):
         """
         Test case for converting a Square instance to a dictionary.
         """
-        square = Square(5, id=1, x=10, y=20)
-        expected_dict = {"id": 1, "size": 5, "x": 10, "y": 20}
+        square = Square(5, 10, 20, 1)
+        expected_dict = {'id': 1, 'size': 5, 'x': 10, 'y': 20}
         self.assertEqual(square.to_dictionary(), expected_dict)
 
 if __name__ == '__main__':
