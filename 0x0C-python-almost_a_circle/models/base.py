@@ -7,6 +7,13 @@ class Base:
     __nb_objects = 0
     
     def __init__(self, id=None):
+        """
+        Initialize a Base instance.
+
+        Args:
+            id (int): Optional. The identifier for the instance. If not provided,
+                an identifier will be assigned based on the number of instances.
+        """
         
         if id != None:
             self.id = id
@@ -25,6 +32,7 @@ class Base:
         Returns:
             str: JSON string representation of list_dictionaries.
         """
+
         if list_dictionaries is None or len(list_dictionaries) == 0:
             return "[]"
         return json.dumps(list_dictionaries)
@@ -37,6 +45,7 @@ class Base:
         Args:
             list_objs (list): A list of instances that inherit from Base.
         """
+
         if list_objs is None:
             list_objs = []
 
@@ -56,6 +65,7 @@ class Base:
         Returns:
             list: List of dictionaries represented by json_string.
         """
+
         if json_string is None or len(json_string) == 0:
             return []
         return json.loads(json_string)
@@ -71,6 +81,7 @@ class Base:
         Returns:
             Base: Instance with all attributes set.
         """
+
         if cls.__name__ == "Rectangle":
             dummy_instance = cls(1, 1)
         elif cls.__name__ == "Square":
@@ -89,6 +100,7 @@ class Base:
         Returns:
             list: List of instances.
         """
+
         filename = cls.__name__ + ".json"
         try:
             with open(filename, mode='r', encoding='utf-8') as file:
@@ -107,6 +119,7 @@ class Base:
         Args:
             list_objs (list): A list of instances that inherit from Base.
         """
+
         if list_objs is None:
             list_objs = []
 
@@ -127,6 +140,7 @@ class Base:
         Returns:
             list: List of instances.
         """
+
         filename = cls.__name__ + ".csv"
         try:
             with open(filename, mode='r', newline='', encoding='utf-8') as file:
@@ -152,6 +166,7 @@ class Base:
             list_rectangles (list): List of Rectangle instances.
             list_squares (list): List of Square instances.
         """
+
         screen = turtle.Screen()
         screen.bgcolor("white")
         screen.title("Draw Rectangles and Squares")
