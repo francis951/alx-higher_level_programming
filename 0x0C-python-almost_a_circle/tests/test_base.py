@@ -1,5 +1,7 @@
 import unittest
 import json
+from models.square import Square
+from models.rectangle import Rectangle
 from models.base import Base  # Replace 'your_module' with the actual name of the module where Base class is defined
 
 class TestBase(unittest.TestCase):
